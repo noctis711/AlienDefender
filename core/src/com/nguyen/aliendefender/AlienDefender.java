@@ -12,14 +12,15 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import java.util.ArrayList;
 import java.util.IntSummaryStatistics;
 import java.util.Iterator;
 import java.util.List;
-
+import java.util.concurrent.TimeUnit;
+//Alien Defender by Nguyen Tran for Senior Project
 public class AlienDefender extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture background;
@@ -27,7 +28,6 @@ public class AlienDefender extends ApplicationAdapter {
 	AnimatedSprite playerAnimated;
 	OrthographicCamera camera;
 	FitViewport viewport;
-	Vector2 velocity = new Vector2();
 	ShotManager shotManager;
 	List<Enemy> enemyList = new ArrayList<Enemy>();
 	Enemy boss;
@@ -45,7 +45,7 @@ public class AlienDefender extends ApplicationAdapter {
 	@Override
 	public void create() {
 		camera = new OrthographicCamera();
-		viewport = new FitViewport(1280, 720, camera);
+		viewport = new FitViewport(SCREEN_WIDTH, SCREEN_HEIGHT, camera);
 		viewport.apply();
 		camera.setToOrtho(false, SCREEN_WIDTH, SCREEN_HEIGHT);
 		camera.update();
@@ -123,8 +123,8 @@ public class AlienDefender extends ApplicationAdapter {
 		}
 	}
 	public void addEnemies(){
-		Texture enemyTexture = new Texture((Gdx.files.internal("greenAIAnimated.png")));
-		for(int i = 0; i < 3; i++){
+		Texture enemyTexture = new Texture((Gdx.files.internal("enemyAnimated.png")));
+		for(int i = 0; i < 5; i++){
 			enemyList.add(new Enemy(enemyTexture, shotManager));
 		}
 	}
@@ -141,6 +141,7 @@ public class AlienDefender extends ApplicationAdapter {
 			BitmapFont font = new BitmapFont();
 			font.getData().setScale(5);
 			font.draw(batch, "GAME OVER!", 400, 400);
+			font.draw(batch, "Alien crafts mutated!", 250, 250);
 			font.draw(batch, "Click to restart. Back, ESC to exit.", 100, 320);
 		}
 
@@ -160,7 +161,7 @@ public class AlienDefender extends ApplicationAdapter {
 		score = 0;
 		playerScore = "SCORE: 0";
 		playerLives = "LIVES : "+Integer.toString(lives);
-		Texture enemyTexture = new Texture((Gdx.files.internal("greenAIAnimated.png")));
+		Texture enemyTexture = new Texture((Gdx.files.internal("alienAnimated.png")));
 		for(int i = 0; i < enemyList.size();i++ ) {
 			enemyList.set(i, new Enemy(enemyTexture, shotManager));
 		}
@@ -180,6 +181,5 @@ public class AlienDefender extends ApplicationAdapter {
 			i.next().update();
 		}
 	}
-
 
 }

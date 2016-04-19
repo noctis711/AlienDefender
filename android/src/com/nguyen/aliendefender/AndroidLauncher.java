@@ -18,6 +18,5 @@ public class AndroidLauncher extends AndroidApplication {
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
 		initialize(new AlienDefender(), config);
 		setTitle("Alien Defender");
-		//config.useImmersiveMode = true;
 	}
 }

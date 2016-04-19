@@ -11,8 +11,6 @@ public class DesktopLauncher {
 		config.height = 720;
 		config.width = 1280;
 		config.title = "Alien Defender";
-		//config.fullscreen = true;
-		//config.height = 1080;
-		//config.width = 1920;
+		config.fullscreen = true;
 	}
 }
